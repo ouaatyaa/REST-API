@@ -1,12 +1,12 @@
 const express = require('express');
-const Product = require('../models/productModel')
 const {updateProduct,getProducts,postProduct,getProduct,deleteProduct} = require('../conrollers/Controller')
 
 const router = express.Router()
 
 // Get Products
-router.get("/:id",getProduct)
 router.get("/",getProducts)
+// Get One Product
+router.get("/:id",getProduct)
 //Create Product
 router.post("/",postProduct)
 // Update One Product

@@ -1,6 +1,8 @@
 const Product = require('../models/productModel')
 
-// get Products 
+//@dec  Get Products 
+//@route GET /api/products
+//@access Private
 
 const getProducts = async (req,res)=>{
     try {
@@ -12,7 +14,9 @@ const getProducts = async (req,res)=>{
     }
  }
 
- // get One Product
+//@dec  Get One Product 
+//@route GET /api/products/:id
+//@access Private
 
  const getProduct = async (req,res)=>{
     try {
@@ -26,7 +30,9 @@ const getProducts = async (req,res)=>{
     }
 }
 
-// post product
+//@dec   Create Product 
+//@route POST /api/products/
+//@access Private
 
 const postProduct = async (req,res)=>{
     try {
@@ -37,7 +43,9 @@ const postProduct = async (req,res)=>{
         res.status(500).json({message:error.message})
     }
  }
-// Delete Product 
+//@dec    Delete Product 
+//@route  DELETE /api/products/:id
+//@access Private 
 
 const deleteProduct = async (req,res)=>{
     try {
@@ -53,11 +61,15 @@ const deleteProduct = async (req,res)=>{
         
     }
 }
-// update Product
+
+//@dec   Update Product 
+//@route PUT /api/products/:id
+//@access Private
 const updateProduct = async (req,res)=>{
     try {
         const {id} = req.params ;
         const product = await Product.findByIdAndUpdate(id,req.body)
+        console.log(req.body)
         if (!product){
             res.status(404).json({message : `ther is no product ${id}`})
         }
