@@ -6,7 +6,7 @@ const Product = require('../models/productModel')
 
 const getProducts = async (req,res)=>{
     try {
-     const products = await Product.find({});
+     const products = await Product.find({user:req.user.id});
      res.status(200).json(products)
     } catch (error) {
         console.log(error.message)
@@ -36,7 +36,13 @@ const getProducts = async (req,res)=>{
 
 const postProduct = async (req,res)=>{
     try {
-     const product = await Product.create(req.body)
+     const product = await Product.create({
+        "user":req.user.id,
+        "name":req.body.name,
+        "quantity":req.body.quantity,
+        "price":req.body.price,
+        "image":req.body.image
+    })
      res.status(200).json(product)
     } catch (error) {
         console.log(error.message)
@@ -69,7 +75,7 @@ const updateProduct = async (req,res)=>{
     try {
         const {id} = req.params ;
         const product = await Product.findByIdAndUpdate(id,req.body)
-        console.log(req.body)
+        //console.log(req.body)
         if (!product){
             res.status(404).json({message : `ther is no product ${id}`})
         }

@@ -1,18 +1,18 @@
 const express = require('express');
 const {updateProduct,getProducts,postProduct,getProduct,deleteProduct} = require('../conrollers/Controller')
-
+const protect = require('../midleware/protect')
 const router = express.Router()
 
 // Get Products
-router.get("/",getProducts)
+router.get("/",protect,getProducts)
 // Get One Product
-router.get("/:id",getProduct)
+router.get("/:id",protect,getProduct)
 //Create Product
-router.post("/",postProduct)
+router.post("/",protect,postProduct)
 // Update One Product
-router.put("/:id",updateProduct)
+router.put("/:id",protect,updateProduct)
 // Delete One Product
-router.delete("/:id",deleteProduct)
+router.delete("/:id",protect,deleteProduct)
 
 module.exports = router ;
 
